@@ -43,7 +43,7 @@ void stack_push(stack_t **stack, unsigned int line_num)
 			{
 				current_node = current_node->next;
 			}
-			new_node->prev = current_node; 
+			new_node->prev = current_node;
 			current_node->next = new_node;
 		}
 	}
