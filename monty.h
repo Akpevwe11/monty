@@ -63,4 +63,6 @@ extern global_t s;
 
 void stack_push(stack_t **head, unsigned int number);
 void stack_pall(stack_t **head, unsigned int number);
+
+void stack_enqueue(stack_t **, int);
 #endif
