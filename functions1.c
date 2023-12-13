@@ -48,7 +48,7 @@ void stack_push(stack_t **stack, unsigned int line_num)
 		}
 	}
 	else
-		queue_push(stack, num_to_push);
+		stack_enqueue(stack, num_to_push);
 }
 /**
  * stack_pall - Function to handle the pall opcode
