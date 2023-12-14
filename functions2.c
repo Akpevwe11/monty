@@ -32,7 +32,7 @@ void stack_add(stack_t **stack, unsigned int line_num)
 
 	s.number = result_string;
 
-	prev__is_stack = s.is_stack; 
+	prev__is_stack = s.is_stack;
 	s.is_stack = 1;
 
 	stack_push(stack, line_num);

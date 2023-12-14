@@ -23,7 +23,7 @@ char *int_to_string(int integer)
 
 	sprintf(result_string, "%d", integer);
 
-	return result_string;
+	return (result_string);
 
 }
 
