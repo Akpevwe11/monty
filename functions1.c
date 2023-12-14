@@ -60,5 +60,20 @@ void stack_push(stack_t **stack, unsigned int line_num)
 
 void stack_pall(stack_t **stack, unsigned int line_num)
 {
+	stack_t *current_node = *stack;
+
+	if (current_node)
+	{
+		while (current_node->next)
+			current_node = current_node->next;
+
+		while (current_node)
+		{
+			printf("%d\n", current_node->n);
+			current_node = current_node->prev;
+		}
+	}
+
+	(void)line_num
 
 }
