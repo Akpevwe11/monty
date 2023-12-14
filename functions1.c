@@ -81,24 +81,24 @@ void stack_pall(stack_t **stack, unsigned int line_num)
 
 /**
  * op_pint - prints the value at the top of the stack
- * @stack: stack
- * @lnum: line number
+ * @stack: pointer to the stack
+ * @line_num: line number
  *
  * Return: void
  */
-void stack_pint(stack_t **stack, unsigned int lnum)
+void stack_pint(stack_t **stack, unsigned int line_num)
 {
-	stack_t *temp = *stack;
+	stack_t *current_node = *stack;
 
-	if (!temp)
+	if (!current_node)
 	{
 		free_global();
-		fprintf(stderr, "L%d: can't pint, stack empty\n", lnum);
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_num);
 		exit(EXIT_FAILURE);
 	}
 
-	for (; temp->next; temp = temp->next)
-		;
-	printf("%d\n", temp->n);
+	while (current_node->next)
+		current_node = current_node->next;
+	printf("%d\n", current_node->n);
 }
 
