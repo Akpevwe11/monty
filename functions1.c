@@ -80,7 +80,7 @@ void stack_pall(stack_t **stack, unsigned int line_num)
 
 
 /**
- * op_pint - prints the value at the top of the stack
+ * stack_pint - prints the value at the top of the stack
  * @stack: pointer to the stack
  * @line_num: line number
  *
@@ -102,3 +102,39 @@ void stack_pint(stack_t **stack, unsigned int line_num)
 	printf("%d\n", current_node->n);
 }
 
+/**
+* stack_pop - removes the top element from the stack
+* @stack: Pointer to the stack
+* @line_num: Line number
+*
+* Return: void
+*/
+
+void stack_pop(stack_t **stack, unsigned int line_num)
+{
+	stack_t *current_top = *stack, *prev_node;
+
+	if (!current_top)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
+		free_global();
+		exit(EXIT_FAILURE);
+	}
+
+	if (!current_top->next)
+	{
+		*stack = NULL;
+		free(current_top);
+		return;
+	}
+
+	while (current_top->next->next)
+	{
+		current_top = current_top->next;
+	}
+
+	prev_node = current_top->next;
+	current_top->next = NULL;
+
+	free(prev_node);
+}
