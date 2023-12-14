@@ -68,8 +68,9 @@ void stack_push(stack_t **head, unsigned int line_num);
 void stack_pall(stack_t **head, unsigned int line_num);
 void stack_pint(stack_t **head, unsigned int line_num);
 void stack_pop(stack_t **head, unsigned int line_num);
-void stack_swap(stack_t **stack, unsigned int line_num);
-void stack_nop(stack_t **stack, unsigned int line_num);
+void stack_swap(stack_t **head, unsigned int line_num);
+void stack_nop(stack_t **head, unsigned int line_num);
+void stack_add(stack_t **stack, unsigned int line_num);
 
 void stack_enqueue(stack_t **, int element);
 #endif

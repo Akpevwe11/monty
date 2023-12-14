@@ -1,6 +1,48 @@
 #include "monty.h"
 
 /**
+ * stack_add - adds the top two elements of the stack
+ * @stack: stack
+ * @line_num: line number
+ *
+ * Return: void
+ */
+void stack_add(stack_t **stack, unsigned int line_num)
+{
+	stack_t *current_node = *stack;
+	char *result_string;
+	int prev__is_stack;
+
+	if (!(*stack) || !(*stack)->next)
+	{
+		free_global();
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+
+	while (current_node->next->next)
+	{
+		current_node = current_node->next;
+	}
+
+	result_string = int_to_string(current_node->n + current_node->next->n);
+
+	stack_pop(stack, line_num);
+	stack_pop(stack, line_num);
+
+	s.number = result_string;
+
+	prev__is_stack = s.is_stack; 
+	s.is_stack = 1;
+
+	stack_push(stack, line_num);
+
+	s.is_stack = prev__is_stack;
+
+	free(result_string);
+}
+
+/**
  * stack_nop - does nothing to the stack
  * @stack: stack
  * @line_num: line number
