@@ -77,3 +77,28 @@ void stack_pall(stack_t **stack, unsigned int line_num)
 	(void)line_num
 
 }
+
+
+/**
+ * op_pint - prints the value at the top of the stack
+ * @stack: stack
+ * @lnum: line number
+ *
+ * Return: void
+ */
+void stack_pint(stack_t **stack, unsigned int lnum)
+{
+	stack_t *temp = *stack;
+
+	if (!temp)
+	{
+		free_global();
+		fprintf(stderr, "L%d: can't pint, stack empty\n", lnum);
+		exit(EXIT_FAILURE);
+	}
+
+	for (; temp->next; temp = temp->next)
+		;
+	printf("%d\n", temp->n);
+}
+
