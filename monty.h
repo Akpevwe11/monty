@@ -61,9 +61,9 @@ typedef struct global_s
 
 extern global_t s;
 
-void stack_push(stack_t **head, unsigned int number);
-void stack_pall(stack_t **head, unsigned int number);
-void stack_pint(stack_t **stack, unsigned int lnum);
+void stack_push(stack_t **head, unsigned int line_num);
+void stack_pall(stack_t **head, unsigned int line_num);
+void stack_pint(stack_t **head, unsigned int line_num);
 
-void stack_enqueue(stack_t **, int);
+void stack_enqueue(stack_t **, int element);
 #endif
