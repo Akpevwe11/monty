@@ -1,4 +1,21 @@
 #include "monty.h"
+
+/**
+ * stack_nop - does nothing to the stack
+ * @stack: stack
+ * @line_num: line number
+ *
+ * Return: void
+ */
+void stack_nop(stack_t **stack, unsigned int line_num)
+{
+	(void)stack;
+	(void)line_num;
+
+
+}
+
+
 /**
  * stack_enqueue - adds an element to the queue
  * @queue: a pointer to the queue

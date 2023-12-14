@@ -1,3 +1,35 @@
+#include "monty.h"
+
+/**
+ * int_to_string - converts an integer to a string
+ * @integer: input integer to be converted
+ *
+ * Return: dynamically allocated string containing the integer as character
+*/
+
+char *int_to_string(int integer)
+{
+	int string_length;
+	char *result_string;
+
+	string_length = snprintf(NULL, 0, "%d", integer);
+	result_string = malloc(sizeof(char) * (string_length + 1));
+
+	if (result_string == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+
+	sprintf(result_string, "%d", integer);
+
+	return result_string;
+
+}
+
+
+
+
 /**
  * num_checker - checks if an array of chars is a number
  * @line_num: line number

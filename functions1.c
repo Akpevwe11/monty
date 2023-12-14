@@ -138,3 +138,47 @@ void stack_pop(stack_t **stack, unsigned int line_num)
 
 	free(prev_node);
 }
+
+/**
+ * stack_swap - swaps the top two elements of the stack
+ * @stack: Pointer to the stack
+ * @line_num: Line number
+ *
+ * Return: void
+*/
+
+void stack_swap(stack_t **stack, unsigned int line_num)
+{
+	stack_t *current_top = *stack, *second_last;
+
+	if (!(*stack) || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_num);
+		free_global();
+		exit(EXIT_FAILURE);
+	}
+
+	while (current_top->next->next)
+	{
+		current_top = current_top->next;
+	}
+
+	s.number = int_to_string(current_top->n);
+	second_last = current_top;
+
+	if (current_top == *stack)
+	{
+		*stack = (*stack)->next;
+		(*stack)->prev_node = NULL;
+	}
+	else
+	{
+		current_top = current_top->next;
+		second_last->prev_node->next = current_top;
+		current_top->prev_node = second_last->prev_node
+	}
+
+	free(second_last);
+	stack_push(stack, line_num);
+	free(s.number);
+}

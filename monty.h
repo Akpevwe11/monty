@@ -61,10 +61,14 @@ typedef struct global_s
 
 extern global_t s;
 
+*int_to_string(int integer);
+void free_global(void);
+
 void stack_push(stack_t **head, unsigned int line_num);
 void stack_pall(stack_t **head, unsigned int line_num);
 void stack_pint(stack_t **head, unsigned int line_num);
 void stack_pop(stack_t **head, unsigned int line_num);
+void stack_swap(stack_t **stack, unsigned int line_num);
 
 void stack_enqueue(stack_t **, int element);
 #endif
