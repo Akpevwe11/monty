@@ -75,11 +75,11 @@ void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
  *
  * Return: void
  */
-void nop(stack_t **stack, unsigned int line_number)
+void nop(UN stack_t **stack, UN unsigned int line_number)
 {
-	(void) stack;
-	(void) line_number;
+	;
 }
+
 
 /**
  * pint - print the int at the top of stack

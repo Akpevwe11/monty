@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#define UN __attribute__((__unused__))
 
 #define DELIMITER "\n\t\r "
 /**
