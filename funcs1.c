@@ -9,9 +9,9 @@
  *
  * Return: void
 */
-void op_push(stack_t **stack, char *number_str, unsigned int line_number)
+void push(stack_t **stack, char *number_str, unsigned int line_number)
 {
-	stack_t *new_node_node = NULL;
+	stack_t *new_node = NULL;
 	int i;
 
 	new_node = malloc(sizeof(stack_t));
@@ -25,11 +25,11 @@ void op_push(stack_t **stack, char *number_str, unsigned int line_number)
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	for (i = 0; n[i]; i++)
+	for (i = 0; number_str[i]; i++)
 	{
-		if (n[0] == '-' && i == 0)
+		if (number_str[0] == '-' && i == 0)
 			continue;
-		if (n[i] < 48 || n[i] > 57)
+		if (number_str[i] < 48 || number_str[i] > 57)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
@@ -54,7 +54,7 @@ void op_push(stack_t **stack, char *number_str, unsigned int line_number)
  * Return: void
 */
 
-void op_pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
+void pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
 	stack_t *current = *stack;
 
@@ -75,7 +75,7 @@ void op_pall(stack_t **stack, unsigned int __attribute__((unused)) line_number)
  *
  * Return: void
  */
-void op_nop(stack_t **stack, unsigned int line_number)
+void nop(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
 	(void) line_number;
@@ -89,7 +89,7 @@ void op_nop(stack_t **stack, unsigned int line_number)
  *
  * Return: void
 */
-void op_pint(stack_t **stack, unsigned int __attribute__((unused)) line_number)
+void pint(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 {
 	if (stack == NULL || *stack == NULL)
 	{
@@ -107,7 +107,7 @@ void op_pint(stack_t **stack, unsigned int __attribute__((unused)) line_number)
  *
  * Return: void
  */
-void op_pop(stack_t **stack, unsigned int line_number)
+void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *to_the_end;
 

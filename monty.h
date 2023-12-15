@@ -40,12 +40,12 @@ typedef struct instruction_s
 extern instruction_t opcodes[];
 unsigned int len(stack_t **stack);
 void free_stack(stack_t *stack);
-void op_nop(stack_t **stack, unsigned int lnum);
-void op_pop(stack_t **stack, unsigned int lnum);
-void op_push(stack_t **stack, char *n, unsigned int lnum);
-void op_pall(stack_t **stack, unsigned int lnum);
-void op_pint(stack_t **stack, unsigned int lnum);
-int find_opcode(stack_t **stack, char *opcode, int lnum);
-void op_swap(stack_t **stack, unsigned int lnum);
+void nop(stack_t **stack, unsigned int lnum);
+void pop(stack_t **stack, unsigned int lnum);
+void push(stack_t **stack, char *number_str, unsigned int lnum);
+void pall(stack_t **stack, unsigned int lnum);
+void pint(stack_t **stack, unsigned int lnum);
+int opcode(stack_t **stack, char *opcode, int lnum);
+void swap(stack_t **stack, unsigned int lnum);
 size_t lol(stack_t *h);
 #endif

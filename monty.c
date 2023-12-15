@@ -12,10 +12,10 @@
 int find_opcode(stack_t **stack, char *opcode, int lnum)
 {
 	instruction_t opcodes[] = {
-		{"pall", op_pall},
-		{"pop", op_pop},
-		{"swap", op_swap},
-		{"pint", op_pint},
+		{"pall", pall},
+		{"pop", pop},
+		{"swap", swap},
+		{"pint", pint},
 		{NULL, NULL}
 	};
 	int i;
@@ -30,4 +30,59 @@ int find_opcode(stack_t **stack, char *opcode, int lnum)
 	}
 	fprintf(stderr, "L%d: unknown instruction %s\n", lnum, opcode);
 	exit(EXIT_FAILURE);
+}
+
+/**
+* main - main function
+*
+* @argc: number of command line arguments
+* @argv: list of command line arguments
+*
+* Return: EXIT_SUCCESS if no errors or EXIT_FAILURE
+**/
+
+int main(__attribute__((unused)) int argc, char const *argv[])
+{
+	FILE *mf;
+	char *buff = NULL, *opcode, *n;
+	size_t lol = 0;
+	int line_number = 0;
+	stack_t *stack = NULL, *current;
+
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		return (EXIT_FAILURE);
+	}
+	mf = fopen(argv[1], "r");
+	if (mf == NULL)
+	{
+		fprintf(stderr, "Error: can't open file %s\n", argv[1]);
+		exit(1);
+	}
+	while ((getline(&buff, &lol, mf)) != -1)
+	{
+		line_number++;
+		opcode = strtok(buff, DELIMITER);
+		if (opcode == NULL || opcode[0] == '#')
+			continue;
+		if (!strcmp(opcode, "nop"))
+			continue;
+		else if (!strcmp(opcode, "push"))
+		{
+			n = strtok(NULL, DELIMITER);
+			push(&stack, n, line_number);
+		}
+		else
+			find_opcode(&stack, opcode, line_number);
+	}
+	fclose(mf);
+	free(buff);
+	while (stack != NULL)
+	{
+		current = stack;
+		stack = stack->next;
+		free(current);
+	}
+	return (0);
 }
