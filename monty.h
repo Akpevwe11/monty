@@ -34,13 +34,13 @@ typedef struct stack_s
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int lnum);
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 extern instruction_t opcodes[];
 unsigned int len(stack_t **stack);
 void free_stack(stack_t *stack);
-void nop(stack_t **stack, unsigned int lnum);
+void nop(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int lnum);
 void push(stack_t **stack, char *number_str, unsigned int lnum);
 void pall(stack_t **stack, unsigned int lnum);
