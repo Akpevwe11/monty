@@ -1,16 +1,12 @@
 #ifndef MONTY_H
 #define MONTY_H
-
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <ctype.h>
+#include <string.h>
 
-#define STACK 0
-#define QUEUE 1
-#define DELIMS " \n\t\a\b"
-
-extern char **op_toks;
-
+#define DELIMITER "\n\t\r "
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -19,8 +15,7 @@ extern char **op_toks;
  *
  * Description: doubly linked list node structure
  * for stack, queues, LIFO, FIFO Holberton project
- */
-
+ **/
 typedef struct stack_s
 {
 	int n;
@@ -34,43 +29,23 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
- */
+ * for stack, queues, LIFO, FIFO Holberton project
+ **/
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(stack_t **stack, unsigned int lnum);
 } instruction_t;
 
-/**
- * struct global_s - Structure for managing global variables
- * @number: A pointer to a string representing a number
- * @file: A pointer to a FILE structure for file operations
- * @buf: A  pointer to a buffer for data manipulation
- * @stack: A pointer to a stack structure for stack operations
- * @is_stack: An integer flag indicating if stack is enabled (1) or ont (0)
- */
-typedef struct global_s
-{
-	char *number;
-	FILE *file;
-	char *buf;
-	stack_t *stack;
-	int is_stack;
-} global_t;
-
-extern global_t s;
-
-*int_to_string(int integer);
-void free_global(void);
-
-void stack_push(stack_t **head, unsigned int line_num);
-void stack_pall(stack_t **head, unsigned int line_num);
-void stack_pint(stack_t **head, unsigned int line_num);
-void stack_pop(stack_t **head, unsigned int line_num);
-void stack_swap(stack_t **head, unsigned int line_num);
-void stack_nop(stack_t **head, unsigned int line_num);
-void stack_add(stack_t **stack, unsigned int line_num);
-
-void stack_enqueue(stack_t **, int element);
+extern instruction_t opcodes[];
+unsigned int len(stack_t **stack);
+void free_stack(stack_t *stack);
+void op_nop(stack_t **stack, unsigned int lnum);
+void op_pop(stack_t **stack, unsigned int lnum);
+void op_push(stack_t **stack, char *n, unsigned int lnum);
+void op_pall(stack_t **stack, unsigned int lnum);
+void op_pint(stack_t **stack, unsigned int lnum);
+int find_opcode(stack_t **stack, char *opcode, int lnum);
+void op_swap(stack_t **stack, unsigned int lnum);
+size_t lol(stack_t *h);
 #endif

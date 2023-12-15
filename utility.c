@@ -76,6 +76,8 @@ void free_stack(stack_t *stack_head)
 	}
 }
 
+
+
 /**
  * free_global - Frees the global structure
  *
