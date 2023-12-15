@@ -41,7 +41,7 @@ extern instruction_t opcodes[];
 unsigned int len(stack_t **stack);
 void free_stack(stack_t *stack);
 void nop(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int lnum);
+void pop(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, char *number_str, unsigned int lnum);
 void pall(stack_t **stack, unsigned int lnum);
 void pint(stack_t **stack, unsigned int lnum);
