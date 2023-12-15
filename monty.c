@@ -33,6 +33,33 @@ int find_opcode(stack_t **stack, char *opcode, int lnum)
 }
 
 /**
+* process_instruction - process a single instruction
+* @stack: stack pointer
+* @line: line from the file
+* @lnum: line number
+*/
+
+void process_instruction(stack_t **stack, char *line, int lnum)
+{
+	char *opcode, *n;
+
+	opcode = strtok(line, DELIMITER);
+
+	if (opcode == NULL || opcode[0] == '#')
+		return;
+
+	if (!strcmp(opcode, "nop"))
+		return;
+	else if (!strcmp(opcode, "push"))
+	{
+		n = strtok(NULL, DELIMITER);
+		push(stack, n, lnum);
+	}
+	else
+		find_opcode(stack, opcode, lnum);
+}
+
+/**
 * main - main function
 *
 * @argc: number of command line arguments
@@ -44,7 +71,7 @@ int find_opcode(stack_t **stack, char *opcode, int lnum)
 int main(__attribute__((unused)) int argc, char const *argv[])
 {
 	FILE *mf;
-	char *buff = NULL, *opcode, *n;
+	char *buff = NULL;
 	size_t lol = 0;
 	int line_number = 0;
 	stack_t *stack = NULL, *current;
@@ -63,18 +90,7 @@ int main(__attribute__((unused)) int argc, char const *argv[])
 	while ((getline(&buff, &lol, mf)) != -1)
 	{
 		line_number++;
-		opcode = strtok(buff, DELIMITER);
-		if (opcode == NULL || opcode[0] == '#')
-			continue;
-		if (!strcmp(opcode, "nop"))
-			continue;
-		else if (!strcmp(opcode, "push"))
-		{
-			n = strtok(NULL, DELIMITER);
-			push(&stack, n, line_number);
-		}
-		else
-			find_opcode(&stack, opcode, line_number);
+		process_instruction(&stack, buff, line_number);
 	}
 	fclose(mf);
 	free(buff);
@@ -85,4 +101,7 @@ int main(__attribute__((unused)) int argc, char const *argv[])
 		free(current);
 	}
 	return (0);
+
 }
+
+

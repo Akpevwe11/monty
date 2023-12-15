@@ -8,7 +8,7 @@
  * @number_str: op_code
  *
  * Return: void
-*/
+ */
 void push(stack_t **stack, char *number_str, unsigned int line_number)
 {
 	stack_t *new_node = NULL;
