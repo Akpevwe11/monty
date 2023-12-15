@@ -14,10 +14,7 @@ int find_opcode(stack_t **stack, char *opcode, int lnum)
 	instruction_t opcodes[] = {
 		{"pall", pall},
 		{"pop", pop},
-		{"swap", swap},
-		{"pint", pint},
-        {"nop", nop},
-		{NULL, NULL}
+		{"swap", swap}
 	};
 	int i;
 

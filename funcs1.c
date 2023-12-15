@@ -5,46 +5,47 @@
  *
  * @stack: pointer to a pointer to the doubly linked list
  * @line_number: line where there is an error
- * @number_str: op_code
+ * @n: op_code
  *
  * Return: void
  */
-void push(stack_t **stack, char *number_str, unsigned int line_number)
+void push(stack_t **stack, char *n, unsigned int line_number)
 {
-	stack_t *new_node = NULL;
+	stack_t *new = NULL;
 	int i;
 
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (number_str == NULL)
+	if (n == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	for (i = 0; number_str[i]; i++)
+	for (i = 0; n[i]; i++)
 	{
-		if (number_str[0] == '-' && i == 0)
+		if (n[0] == '-' && i == 0)
 			continue;
-		if (number_str[i] < 48 || number_str[i] > 57)
+		if (n[i] < 48 || n[i] > 57)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 	}
-	new_node->n = atoi(number_str);
-	new_node->prev = NULL;
-	new_node->next = NULL;
+	new->n = atoi(n);
+	new->prev = NULL;
+	new->next = NULL;
 	if (*stack != NULL)
 	{
-		new_node->next = *stack;
-		(*stack)->prev = new_node;
+		new->next = *stack;
+		(*stack)->prev = new;
 	}
-	*stack = new_node;
+	*stack = new;
 }
+
 /**
  * pall - print stack's elements
  *
