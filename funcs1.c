@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * op_push - add element on top of stack
+ * push - add element on top of stack
  *
  * @stack: pointer to a pointer to the doubly linked list
  * @line_number: line where there is an error
@@ -46,7 +46,7 @@ void push(stack_t **stack, char *number_str, unsigned int line_number)
 	*stack = new_node;
 }
 /**
- * op_pall - print stack's elements
+ * pall - print stack's elements
  *
  * @line_number: will not be used , we usse attribute not void
  * @stack: pointer to the head of the doubly linked list
@@ -82,7 +82,7 @@ void nop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * op_pint - print the int at the top of stack
+ * pint - print the int at the top of stack
  *
  * @stack: double pointer th the head
  * @line_number: number of lines
@@ -100,7 +100,7 @@ void pint(stack_t **stack, unsigned int __attribute__((unused)) line_number)
 }
 
 /**
- * op_pop - removes the last inserted element
+ * pop - removes the last inserted element
  *
  * @line_number: number of lines  in the file
  * @stack: pointer to the pointer to the head
