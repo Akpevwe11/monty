@@ -46,7 +46,7 @@ typedef struct instruction_s
  * @file: Pointer to monty file
  * @buf: content of the current line
  * @stack: stack
- * @is_stack: Flag to indicate stack or queue mode
+ * @is_queue: Flag to indicate stack or queue mode
  */
 typedef struct bus_data
 {
@@ -54,8 +54,20 @@ typedef struct bus_data
 	FILE *file;
 	char *buf;
 	stack_t *stack;
-	int is_stack;
+	int is_queue;
 } bus_data_t;
 
 extern bus_data_t bus;
 
+ssize_t getstdin(char **lineptr, int file);
+void stack_push(stack_t **head, unsigned int line_number);
+void pall(stack_t **head, unsigned int line_number);
+void add_to_stack(stack_t **head, int n);
+void add_two_elements(stack_t **head, unsigned int line_number);
+void set_queue_mode(stack_t **head, unsigned int line_number);
+void enqueue_node(stack_t **tail, int n);
+int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
+void free_stack(stack_t *head);
+void nop(stack **head, unsigned int line_number);
+void pop(stack_t **head, unsigned int line_number);
+void print_top(stack_t **head, unsigned int line_number);
