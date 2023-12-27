@@ -1,50 +1,84 @@
 #include "monty.h"
 
 /**
- * main - monty code interpreter
- * @argc: number of arguments
- * @argv: monty file location
+ * find_opcode - find operation code
+ * @stack: stack pointer
+ * @opcode: user input opcode
+ * @line_number: line number
  *
- * Return: 0 on success
- */
+ * Return: Always 1 (success) on stderr
+ **/
 
-int main(int argc, char **argv)
+int find_opcode(stack_t **stack, char *opcode, int line_number)
 {
-	bus_data_t bus = {NULL, NULL, NULL, NULL, 0};
-	char *content;
+	instruction_t opcodes[] = {
+		{"pall", stack_pall},
+		{"pop", stack_pop},
+		{"swap", stack_swap},
+		{"pint", stack_pint},
+		{NULL, NULL}
+	};
+
+	int i;
+
+	for (i = 0; opcodes[i].opcode; i++)
+	{
+		if (strcmp(opcode, opcodes[i].opcode) == 0)
+		{
+			(opcodes[i].f)(stack, line_number);
+			return (EXIT_SUCCESS);
+		}
+	}
+
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+	exit(EXIT_FAILURE);
+}
+
+/**
+ * main - main function
+ * @argc: number of command line arguments
+ * @argv: list of command line arguments
+ *
+ * Return: EXIT_SUCCESS if no errors or EXIT_FAILURE
+ **/
+
+int main(__attribute__((unused)) int argc, char const *argv[])
+{
 	FILE *file;
+	char *buffer = NULL, *opcode, *n;
 	size_t size = 0;
-	ssize_t read_line = 1;
-	stack_t *stack = NULL;
-	unsigned int counter = 0;
+	int line_number = 0;
+	stack_t *stack = NULL, *current;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 
-	file = fopen(argv[1], "r");
-	bus.file = file;
-	if (!file)
+	file = process_file(argv[1]);
+
+	while ((getline(&buffer, &size, file) != -1)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	while (read_line > 0)
-	{
-		content = NULL;
-		read_line = getline(&content, &size, file);
-		bus.content = content;
-		counter++;
-		if (read_line > 0)
+		line_number++;
+		opcode = strtok(buffer, DELIMITER);
+		if (opcode == NULL || opcode[0] == '#')
+			continue;
+		if (!strcmp(opcode, "nop"))
+			continue;
+		else if (!strcmp(opcode, "push"))
 		{
-			execute(content, &stack, counter, file);
+			n = strtok(NULL, DELIMITER);
+			stack_push(&stack, n, line_number);
 		}
-		free(content);
+		else
+			find_opcode(&stack, opcode, line_number);
 	}
-	free_stack(stack);
 	fclose(file);
+	free(buffer);
+	clean_up(stack);
+
 
 	return (0);
+
 }

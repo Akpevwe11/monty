@@ -2,6 +2,7 @@
 #define MONTY_H
 
 #define SIZE 1024
+#define DELIMITER "\n\t\r "
 
 #include <stdio.h>
 #include <unistd.h>
@@ -41,33 +42,23 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct bus_data - container for the program variables
- * @arg: value associated with the structure
- * @file: Pointer to monty file
- * @buf: content of the current line
+ * struct global_s - global structure
+ * @number: number
+ * @file: file
+ * @buf: buffer
  * @stack: stack
- * @is_queue: Flag to indicate stack or queue mode
  */
-typedef struct bus_data
+typedef struct global_s
 {
-	char *arg;
 	FILE *file;
 	char *buf;
 	stack_t *stack;
-	int is_queue;
-} bus_data_t;
+	int is_stack;
+    size_t size;
+    char *opcode;
+} global_t;
 
-extern bus_data_t bus;
+extern global_t s;
 
-ssize_t getstdin(char **lineptr, int file);
-void stack_push(stack_t **head, unsigned int line_number);
-void pall(stack_t **head, unsigned int line_number);
-void add_to_stack(stack_t **head, int n);
-void add_two_elements(stack_t **head, unsigned int line_number);
-void set_queue_mode(stack_t **head, unsigned int line_number);
-void enqueue_node(stack_t **tail, int n);
-int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
-void free_stack(stack_t *head);
-void nop(stack **head, unsigned int line_number);
-void pop(stack_t **head, unsigned int line_number);
-void print_top(stack_t **head, unsigned int line_number);
+extern instruction_t opcodes[];
+#endif
